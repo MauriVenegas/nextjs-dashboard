@@ -1,3 +1,5 @@
+import { montserrat } from './ui/fonts';
+import './ui/global.css'
 export default function RootLayout({
   children,
 }: {
@@ -5,7 +7,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      {/* descarga y optimiza la fuente desde Google fonts */}
+      <body className={`${montserrat.className} antialiased`}>
+        {children}
+        <footer className='py-10 flex justify-center items-center'>
+          Echo con ❤️ por la gente de Vercel
+        </footer>
+      </body>
     </html>
   );
 }
