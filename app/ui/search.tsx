@@ -1,8 +1,29 @@
 'use client';
 
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import { useSearchParams, usePathname, useRouter } from 'next/navigation';
+import { useDebouncedCallback } from 'use-debounce';
 
+const WAITE_BETWEEN_CHANGE = 300
 export default function Search({ placeholder }: { placeholder: string }) {
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
+
+  // Agrega lo que se busca en formato de query a la url
+  const handleSearch = useDebouncedCallback ((term: string) => {
+    const params = new URLSearchParams(searchParams);
+    // Se crean los parámetros para agregar a la URL
+    if (term) {
+      params.set('query', term);
+    } else {
+      params.delete('query');
+    }
+    params.set('page','1')
+    // Agrega los parámetros a la url
+    replace(`${pathname}?${params.toString()}`)
+  }, WAITE_BETWEEN_CHANGE)
+
   return (
     <div className="relative flex flex-1 flex-shrink-0">
       <label htmlFor="search" className="sr-only">
@@ -11,6 +32,8 @@ export default function Search({ placeholder }: { placeholder: string }) {
       <input
         className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
         placeholder={placeholder}
+        onChange={(e) => { handleSearch(e.target.value) }}
+        defaultValue={searchParams.get('query')?.toString()}
       />
       <MagnifyingGlassIcon className="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
     </div>
