@@ -69,3 +69,29 @@ Pero el archivo de loading se cargara a todas las sub carpetas en este caso **in
 ##### Streaming de componentes
 
 El problema del archivo loading es que espera que se carguen todos los componentes para mostrar la pagina, por lo cual se recomienda el uso del componente de React **\<Suspense\>** el cual permite mostrar un esqueleto para cada componente mientra este se carga.
+
+#### 🔍 busqueda y paginación
+
+A medida que se escribe la factura (invoice) a buscar esta se agrega a la URL de la pagina, se esa forma se puede compartir esta URL con la busqueda realizada.
+
+El componente donde se realiza esto es:
+[./app/dashboard/invoices/page.tsx](./app/dashboard/invoices/page.tsx)
+
+#### ⚡️ Server actions
+
+Las acciones de React server permiten ejecutar codigo asincrono en el servidor y se pueden invocar desde el cliente o componente del servidor.
+
+Debvemo escribir **'use server'** para ejecutar coodigo en el servidor:
+[./app/lib/actions.ts](./app/lib/actions.ts)
+
+#### 😨 Manejo de errores
+
+El archivo **error.tsx** nos permite capturar los errores y mostrarselos al usuario.
+
+Los errores se ecuentran en: [./app/lib/actions.ts](./app/lib/actions.ts)
+
+Y son capturados en: [./app/dashboard/invoices/error.tsx](./app/dashboard/invoices/error.tsx)
+
+El archivo **not-fund.tsx** lo utilizamos cuando no encontrmao la pagina y se llama con **notFound()**
+
+Ver archivo: [./app/dashboard/invoices/[id]/edit/page.tsx](./app/dashboard/invoices/[id]/edit/page.tsx)
