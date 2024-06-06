@@ -95,3 +95,9 @@ Y son capturados en: [./app/dashboard/invoices/error.tsx](./app/dashboard/invoic
 El archivo **not-fund.tsx** lo utilizamos cuando no encontrmao la pagina y se llama con **notFound()**
 
 Ver archivo: [./app/dashboard/invoices/[id]/edit/page.tsx](./app/dashboard/invoices/[id]/edit/page.tsx)
+
+#### ✔ Validacion de formulario
+
+Para esto utilizamo el hooks **useFormState**, ver archivo: [./app/ui/invoices/create-form.tsx](./app/ui/invoices/create-form.tsx)
+
+y los errores los encontramos con Zod en el archivo: [./app/lib/actions.ts](./app/lib/actions.ts)
