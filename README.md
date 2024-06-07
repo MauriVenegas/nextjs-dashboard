@@ -144,3 +144,8 @@ export const metadata: Metadata = {
   title: 'Invoices',
 };
 ```
+
+> [!INFO]
+>
+> Solución original del curso de Next.js echa por Vercel.
+> [https://github.com/vercel/next-learn/tree/main/dashboard/final-example](https://github.com/vercel/next-learn/tree/main/dashboard/final-example)
