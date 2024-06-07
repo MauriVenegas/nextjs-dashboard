@@ -70,34 +70,48 @@ Pero el archivo de loading se cargara a todas las sub carpetas en este caso **in
 
 El problema del archivo loading es que espera que se carguen todos los componentes para mostrar la pagina, por lo cual se recomienda el uso del componente de React **\<Suspense\>** el cual permite mostrar un esqueleto para cada componente mientra este se carga.
 
-#### 🔍 busqueda y paginación
+#### 🔍 búsqueda y paginación
 
-A medida que se escribe la factura (invoice) a buscar esta se agrega a la URL de la pagina, se esa forma se puede compartir esta URL con la busqueda realizada.
+A medida que se escribe la factura (invoice) a buscar esta se agrega a la URL de la pagina, se esa forma se puede compartir esta URL con la búsqueda realizada.
 
 El componente donde se realiza esto es:
 [./app/dashboard/invoices/page.tsx](./app/dashboard/invoices/page.tsx)
 
 #### ⚡️ Server actions
 
-Las acciones de React server permiten ejecutar codigo asincrono en el servidor y se pueden invocar desde el cliente o componente del servidor.
+Las acciones de React server permiten ejecutar código asíncrono en el servidor y se pueden invocar desde el cliente o componente del servidor.
 
-Debvemo escribir **'use server'** para ejecutar coodigo en el servidor:
+Debvemo escribir **'use server'** para ejecutar código en el servidor:
 [./app/lib/actions.ts](./app/lib/actions.ts)
 
 #### 😨 Manejo de errores
 
-El archivo **error.tsx** nos permite capturar los errores y mostrarselos al usuario.
+El archivo **error.tsx** nos permite capturar los errores y mostrárselos al usuario.
 
-Los errores se ecuentran en: [./app/lib/actions.ts](./app/lib/actions.ts)
+Los errores se encuentran en: [./app/lib/actions.ts](./app/lib/actions.ts)
 
 Y son capturados en: [./app/dashboard/invoices/error.tsx](./app/dashboard/invoices/error.tsx)
 
-El archivo **not-fund.tsx** lo utilizamos cuando no encontrmao la pagina y se llama con **notFound()**
+El archivo **not-fund.tsx** lo utilizamos cuando no encontramos la pagina y se llama con **notFound()**
 
 Ver archivo: [./app/dashboard/invoices/[id]/edit/page.tsx](./app/dashboard/invoices/[id]/edit/page.tsx)
 
-#### ✔ Validacion de formulario
+#### ✔ Validación de formulario
 
-Para esto utilizamo el hooks **useFormState**, ver archivo: [./app/ui/invoices/create-form.tsx](./app/ui/invoices/create-form.tsx)
+Para esto utilizamos el hooks **useFormState**, ver archivo: [./app/ui/invoices/create-form.tsx](./app/ui/invoices/create-form.tsx)
 
 y los errores los encontramos con Zod en el archivo: [./app/lib/actions.ts](./app/lib/actions.ts)
+
+#### 🔐 Autentificación de usuario
+
+1. Instalar el paquete `npm install next-auth@beta`.
+2. Generar una secret key `openssl rand -base64 32`.
+3. Agregar la secret key generada al **.env** `AUTH_SECRET=your-secret-key`
+4. Creación del archivo [./auth.config.ts](./auth.config.ts)
+5. Crear el middleware [./middleware.ts](./middleware.ts)
+6. Crear el archivo de autetificación [./auth.ts](./auth.ts)
+7. Crear la funcion **authenticate** en [./app/lib/actions.ts](./app/lib/actions.ts)
+8. Desplegar errores al validar credenciales [./app/ui/login-form.tsx](./app/ui/login-form.tsx)
+9. Agregar la funcionalidad para cerrar sesioón [./app/ui/dashboard/sidenav.tsx](./app/ui/dashboard/sidenav.tsx)
+
+**Credenciales** -> Email: user@nextmail.com Password: 123456

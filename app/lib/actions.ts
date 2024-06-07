@@ -5,7 +5,8 @@ import { z } from 'zod';
 import { sql } from '@vercel/postgres';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
-import { log } from 'console';
+import { signIn } from '@/auth';
+import { AuthError } from 'next-auth';
 
 // Schema para validar que los datos de invoices cumplan cierta estructura
 const invoiceSchema = z.object({
@@ -119,4 +120,24 @@ export async function deleteInvoice(id: string) {
     };
   }
   revalidatePath('/dashboard/invoices');
+}
+
+// prevState: contiene el estado pasado desde el hook useFormState en 'app/ui/login-form.tsx'. No se usara en la acción de este ejemplo, pero es un accesorio obligatorio.
+export async function authenticate(
+  prevState: string | undefined,
+  formData: FormData,
+) {
+  try {
+    await signIn('credentials', formData);
+  } catch (error) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case 'CredentialsSignin':
+          return 'Invalid credentials.';
+        default:
+          return 'Something went wrong.';
+      }
+    }
+    throw error;
+  }
 }
