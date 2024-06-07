@@ -110,8 +110,37 @@ y los errores los encontramos con Zod en el archivo: [./app/lib/actions.ts](./ap
 4. Creación del archivo [./auth.config.ts](./auth.config.ts)
 5. Crear el middleware [./middleware.ts](./middleware.ts)
 6. Crear el archivo de autetificación [./auth.ts](./auth.ts)
-7. Crear la funcion **authenticate** en [./app/lib/actions.ts](./app/lib/actions.ts)
+7. Crear la función **authenticate** en [./app/lib/actions.ts](./app/lib/actions.ts)
 8. Desplegar errores al validar credenciales [./app/ui/login-form.tsx](./app/ui/login-form.tsx)
-9. Agregar la funcionalidad para cerrar sesioón [./app/ui/dashboard/sidenav.tsx](./app/ui/dashboard/sidenav.tsx)
+9. Agregar la funcionalidad para cerrar sesión [./app/ui/dashboard/sidenav.tsx](./app/ui/dashboard/sidenav.tsx)
 
 **Credenciales** -> Email: user@nextmail.com Password: 123456
+
+#### ℹ️ Agregando metadata
+
+Podemos agregar la metadata desde la raíz del proyecto [./app/layout.tsx](./app/layout.tsx)
+
+```
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: {
+    template: '%s | Acme Dashboard', //%s: se remplazará con el titulo especifico de cada pagina
+    default: 'Acme Dashboard',
+  },
+  description: 'The official Next.js Learn Dashboard built with App Router.',
+  metadataBase: new URL('https://next-learn-dashboard.vercel.sh'),
+};
+```
+
+He ir modificando los datos que necesitemos por cada pagina, en este caso vamos modificando el título según pagina.
+
+Ej: modificamos el titulo cuando entramos a [./app/dashboard/invoices/page.tsx](./app/dashboard/invoices/page.tsx)
+
+```
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Invoices',
+};
+```
